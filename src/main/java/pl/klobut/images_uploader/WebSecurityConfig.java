@@ -26,14 +26,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/test1").hasRole("USER")
-                .antMatchers("/test2").hasRole("ADMIN")
+                .antMatchers("/test1").access("hasRole('USER')")
+                .antMatchers("/test2").access("hasRole('ADMIN')")
+                .antMatchers("/uploadImage").permitAll()
                 .and()
-                .formLogin().permitAll();
+                .formLogin().permitAll()
+                .and()
+                .csrf().disable()
+                .headers().frameOptions().disable()
+                .and()
+                .headers().disable();
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 }

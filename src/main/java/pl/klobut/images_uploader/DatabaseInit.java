@@ -18,8 +18,8 @@ public class DatabaseInit {
 
     @EventListener(ApplicationReadyEvent.class)
     public void saveUser() {
-        User admin = new User("admin", passwordEncoder.encode("UserJan"), "USER");
-        User user = new User("user", passwordEncoder.encode("AdminJan"), "ADMIN");
+        User admin = new User("admin", passwordEncoder.encode("AdminJan"), "ADMIN");
+        User user = new User("user", passwordEncoder.encode("UserJan"), "USER");
         userRepo.save(admin);
         userRepo.save(user);
 
